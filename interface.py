@@ -1,4 +1,4 @@
-import enemy
+import npc
 
 class StartGame:
 
