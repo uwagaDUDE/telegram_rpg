@@ -38,6 +38,10 @@ class Fight:
     def player_attack_turn(self, player_damage, enemy_name):
         return print(f'Вы нанесли {player_damage} по {enemy_name}')
 
+    def player_turn(self):
+        print(f'1. Attack\n'
+              f'2. Run')
+
 class Move:
 
     def forward(self):
@@ -64,4 +68,7 @@ class Event:
     def player_attacked_by_enemy(self, monster_name):
         return print(f'На вас напал {monster_name}!'
                      f'\nЗащищайтесь!\n')
+
+    def nothink_event(self):
+        return print(f'Vi prodoljaete idti...')
 
