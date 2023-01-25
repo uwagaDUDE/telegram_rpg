@@ -1,0 +1,62 @@
+import enemy
+
+class StartGame:
+
+    def start_game(self,
+                   start_items=[],
+                   random_gold=0):
+        print(f'Вы очнулись на полянке в лесу...\n'
+              f'Похлопав по карманам вы обнаруживаете что у вас {random_gold} золота\n'
+              f'Рядом с собой вы так же обнаруживаете мешок, в нем лежит : {start_items}')
+
+class Interface:
+
+    def what_to_do(self):
+        return print(f'Что будем делать?\n'
+                     f'1. Пойти прямо\n'
+                     f'2. Пойти налево\n'
+                     f'3. Пойти направо\n'
+                     f'4. Заглянуть в свою сумку\n'
+                     f'5. ')
+
+class Fight:
+
+    def __init__(self):
+        print()
+
+    def enemy_attack_player(self, enemy_name):
+        return print(f'На вас напал {enemy_name}')
+
+    def enemy_hp(self, enemy_hp):
+        return print(f'Здоровье противника составляет: {enemy_hp}')
+
+    def player_attack_turn(self, player_damage, enemy_name):
+        return print(f'Вы нанесли {player_damage} по {enemy_name}')
+
+class Move:
+
+    def forward_move(self):
+        return print(f'Вы решаете пойти прямо...\n')
+
+    def left_move(self):
+        return print(f'Вы решаете пойти налево...\n')
+
+    def right_move(self):
+        return print(f'Вы решаете пойти направо...\n')
+
+class Event:
+
+    def wallet_with_gold(self, random_gold=0):
+        return print(f'\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n'
+                     f'Вы нашли мешочек с золотом, в нем было {random_gold} монет\n'
+                     f'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n')
+
+    def player_see_enemy(self, monster_name):
+        return print(f'Вы замечаете {monster_name} вдалеке, что вы решаете сделать? \n'
+                     f'1. Атаковать\n'
+                     f'2. Пройти мимо\n')
+
+    def player_attacked_by_enemy(self, monster_name):
+        return print(f'На вас напал {monster_name}!'
+                     f'\nЗащищайтесь!\n')
+

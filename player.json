@@ -1,0 +1,8 @@
+{
+  "player":
+  {
+    "player_name": "",
+    "default_player_health": 100,
+    "default_player_damage": 5
+  }
+}

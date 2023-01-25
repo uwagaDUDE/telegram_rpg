@@ -1,0 +1,13 @@
+{
+  "start_items":
+  {
+    "wooden_sword":
+    {
+    "item_name": "Деревянный меч",
+    "damage": 5,
+    "sell_cost": 10,
+    "buy_cost": 15,
+    "item_id": 0
+    },
+  }
+}
