@@ -1,1 +1,4 @@
 pytelegrambotapi
+psycopg2
+python-dotenv
+
