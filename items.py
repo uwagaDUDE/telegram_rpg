@@ -6,7 +6,9 @@ import random
 # 500 - Quests items
 # 1000 - Craft items
 class Items:
+    
     class Weapons:
+        
         class WoodenSword:
             def __init__(self):
                 self.name = 'Деревянный меч'
@@ -30,10 +32,10 @@ class Items:
                 self.sell_price = 50
                 self.buy_price = 100
                 self.item_id = 102
+                
     class Armor:
 
         class VillagerCloth:
-
             def __init__(self):
                 self.name = 'Крестьянская одежда'
                 self.armor = 5
@@ -42,8 +44,8 @@ class Items:
                 self.item_id = 201
 #
     class Food:
+        
         class Apple:
-
             def __init__(self):
                 self.name = 'Яблоко'
                 self.heal = 5
@@ -52,13 +54,13 @@ class Items:
                 self.item_id = 300
 
         class GrilledChicken:
-
             def __init__(self):
                 self.name = 'Жареная курица'
                 self.heal = 50
                 self.sell_price = 0
                 self.buy_price = 40
                 self.item_id = 301
+                
     class QuestItems:
 
         class TestItem:
@@ -69,7 +71,6 @@ class Items:
     class CraftItem:
 
         class RawChicken:
-
             def __init__(self):
                 self.name = 'Сырая курица'
                 self.buy_price = 10
