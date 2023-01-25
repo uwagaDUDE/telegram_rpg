@@ -75,3 +75,17 @@ class Items:
                 self.name = 'Сырая курица'
                 self.buy_price = 10
                 self.item_id = 1000
+
+        class RawMeat:
+
+            def __init__(self):
+                self.name = 'Сырое мясо'
+                self.buy_price = 10
+                self.item_id = 1001
+
+        class WolfFur:
+
+            def __init__(self):
+                self.name = 'Волчья шкура'
+                self.sell_price = 100
+                self.item_id = 1002
