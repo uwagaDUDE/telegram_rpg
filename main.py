@@ -12,6 +12,8 @@ move = scripts.Movement()
 interface = interface.Interface()
 bot = telebot.TeleBot("5855247722:AAGB3OF41dXmqqZQndYsuux5-2iIsxvP348")
 
+event = scripts.Event()
+
 @bot.message_handler(commands=['start'])  # /start - Главное меню
 def handle_start(message):
     user = message.from_user
@@ -24,5 +26,3 @@ def handle_start(message):
     user_markup.row('БЛОК3', 'БЛОК4')
     print(player)
     bot.send_message(user.id, f'Добро пожаловать {user.first_name} \nВаш персонаж: \n   Уровень: {player}', reply_markup=user_markup)
-
-bot.polling(none_stop=True, interval=0)
