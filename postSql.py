@@ -6,9 +6,21 @@ import os
 
 load_dotenv(find_dotenv())
 
-try:
-    # пытаемся подключиться к базе данных
-    conn = psycopg2.connect(dbname='postgres', user='postgres', password=os.environ.get("SQL_PASSWORD"), host='localhost',port=5432)
-except:
-    # в случае сбоя подключения будет выведено сообщение в STDOUT
-    print('Can`t establish connection to database')
+class DataBase:
+    def __init__(self, dbname, user, host='localhost', port=5432):
+        self.dbname = dbname
+        self.user = user
+        self.password = os.environ.get("SQL_PASSWORD")
+        self.host = host
+        self.port = port
+        self.cursor = None
+
+    def connect(self):
+        try:
+            conn = psycopg2.connect(dbname=self.dbname, user=self.user,
+                                    password=self.password, host=self.host, port=self.port)
+            self.cursor = conn.cursor()
+        except Exception():
+            print(Exception())
+
+
