@@ -1,5 +1,6 @@
 import interface
 import items, player
+import npc
 import postSql
 import scripts
 weapon = items.Items().Weapons()
@@ -7,10 +8,11 @@ name = interface.StartGame().start_game(weapon.WoodenSword().name, 2)
 player = player.Player(name)
 move = scripts.Movement()
 interface = interface.Interface()
+event = scripts.Event()
 
 # bot = telebot.TeleBot(os.environ.get("API_KEY"))
-db= postSql.DataBase(dbname='postgres', user='postgres')
-db.connect()
+# db= postSql.DataBase(dbname='postgres', user='postgres')
+# db.connect()
 
 def main():
 
@@ -22,15 +24,19 @@ def main():
 
         if user_choice == "1":
             move.forward_move()
+            event.player_event_while_move(npc.Enemy().Orcs().Peon().name)
         elif user_choice == "2":
             move.left_move()
+            event.player_event_while_move(npc.Enemy().Orcs().Peon().name)
         elif user_choice == "3":
             move.right_move()
+            event.player_event_while_move(npc.Enemy().Orcs().Peon().name)
+
         else:
             print('NOT REALISED')
 
 
-#main()
+main()
 
 
 # def getPlayer(playerId):
