@@ -3,16 +3,12 @@ import random
 class Items:
     class Weapons:
         class WoodenSword:
-            def name(self):
-                return 'Деревянный меч'
-            def damage(self):
-                return random.randint(5,8)
-            def sell_price(self):
-                return 5
-            def buy_price(self):
-                return 10
-            def item_id(self):
-                return 0
+            def __init__(self):
+                self.name = 'Деревянный меч'
+                self.damage = random.randint(5,8)
+                self.sell_price = 5
+                self.buy_price = 10
+                self.item_id = 0
 
         # class Items:
 #
