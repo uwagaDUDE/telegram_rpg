@@ -1,8 +1,10 @@
+import interface
 from dotenv import load_dotenv, find_dotenv
 from pymongo import MongoClient
 
 client = MongoClient('mongodb://localhost:27017/')
 mongo = client.local
+bot = interface.Bot().bot()
 
 
 def getPlayer(playerId):

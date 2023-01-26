@@ -11,7 +11,18 @@ class StartGame:
               f'Но как же вас зовут?')
         name = input('Введите свое имя: ')
         return name
+class Bot:
 
+    def bot(self):
+        user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
+        user_markup.row('Начать путешестиве', 'Посмотреть инвентарь')
+        user_markup.row('Об игре', 'БЛОК4')
+        bot.send_message(
+            user.id, f'Добро пожаловать {user.first_name} \n'
+                     f'Ваш персонаж: \n   '
+                     f'Уровень: {player["level"]}   '
+                     f'\n Предметов в инвентаре: {len(player["items"])}',
+            reply_markup=user_markup)
 class Interface:
 
     def what_to_do(self):
