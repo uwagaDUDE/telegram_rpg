@@ -4,7 +4,6 @@ import player
 import scripts
 import TelegramBot
 
-load_dotenv()
 weapon = items.Items().Weapons()
 # name = interface.StartGame().start_game(weapon.WoodenSword().name, 2)
 # player = player.Player(name)
