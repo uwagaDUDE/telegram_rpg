@@ -1,6 +1,5 @@
 import interface
 import items
-import player
 import scripts
 import TelegramBot
 
@@ -13,3 +12,4 @@ interface = interface.Interface()
 event = scripts.Event()
 
 TelegramBot.botStart()
+
