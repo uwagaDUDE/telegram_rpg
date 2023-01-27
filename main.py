@@ -11,5 +11,6 @@ interface = interface.Interface()
 
 event = scripts.Event()
 
-TelegramBot.botStart()
+TelegramBot.bot_init()
+
 

@@ -14,7 +14,14 @@ def createPlayer(id,userName):
         'id': id,
         'userName':userName,
         'level': 1,
+        'hp': 100,
+        'mana':100,
+        'gold':0,
+        'strenght':1,
+        'agility':1,
+        'intelegency':1,
         'items': [],
+        'location':[]
     })
 
 def updatePlayerInventory(id,items):

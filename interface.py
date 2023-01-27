@@ -72,3 +72,9 @@ class Event:
     def nothink_event(self):
         return print(f'Vi prodoljaete idti...')
 
+class BotInterface:
+    def __init__(self, user, player):
+         self.information = f'\nВаш персонаж:\n' \
+                            f'Имя:{user.first_name}\n'\
+                            f'Уровень: { player["level"] }\n'\
+                            f'Предметов в инвентаре: {len(player["items"])}'
