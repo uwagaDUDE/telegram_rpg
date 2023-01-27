@@ -2,7 +2,7 @@ from dotenv import dotenv_values
 from pymongo import MongoClient
 
 client = MongoClient(f'mongodb+srv://amogus:{dotenv_values(".env")["DB_PASSWORD"]}@cluster0.hearvjr.mongodb.net/?retryWrites=true&w=majority')
-mongo = client.local
+mongo = client.test
 
 
 def getPlayer(playerId):
