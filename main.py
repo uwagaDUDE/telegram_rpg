@@ -1,7 +1,7 @@
 import interface
 import items
 import scripts
-import TelegramBot
+import telegram_bot
 
 weapon = items.Items().Weapons()
 # name = interface.StartGame().start_game(weapon.WoodenSword().name, 2)
@@ -11,6 +11,6 @@ interface = interface.Interface()
 
 event = scripts.Event()
 
-TelegramBot.bot_init()
+telegram_bot.bot_init()
 
 

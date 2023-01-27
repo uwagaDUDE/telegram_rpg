@@ -83,9 +83,24 @@ class Event:
     def nothink_event(self):
         return print(f'Vi prodoljaete idti...')
 
-class BotInterface:
+class BotPlayerInfo:
     def __init__(self, user, player):
          self.information = f'\nВаш персонаж:\n' \
                             f'Имя:{user.first_name}\n'\
                             f'Уровень: { player["level"] }\n'\
                             f'Предметов в инвентаре: {len(player["items"])}'
+
+    #Need translate, bcz net russkogo)
+class Buttons:
+
+    def empty_backpack(self):
+        return "Inventory is empty"
+
+    def start_game(self):
+        return "Начать Путешествие"
+
+    def check_inventory(self):
+        return "Посмотреть инвентарь"
+
+    def back(self):
+        return "Назад"

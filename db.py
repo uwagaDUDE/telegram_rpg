@@ -5,11 +5,11 @@ client = MongoClient(f'mongodb+srv://amogus:{dotenv_values(".env")["DB_PASSWORD"
 mongo = client.test
 
 
-def getPlayer(playerId):
+def get_player(playerId):
     return mongo.players.find_one({'id': playerId})
 
 
-def createPlayer(id,userName):
+def create_new_player(id, userName):
     return mongo.players.insert_one({  # / изначальне характеристики, если игрок не найден
         'id': id,
         'userName':userName,
@@ -24,7 +24,7 @@ def createPlayer(id,userName):
         'location':[]
     })
 
-def updatePlayerInventory(id,items): # пока не используется, и возможно не планируется
+def update_player_inventory(id, items): # пока не используется, и возможно не планируется
     return mongo.player.update_one({"id":str(id)}, {"push":{"items": items}},upsert= True)
-def updatePlayer(id,updateObject):
+def update_player_data(id, updateObject):
     return mongo.players.update_one({"id":str(id)},{"$set":updateObject},upsert=True)
