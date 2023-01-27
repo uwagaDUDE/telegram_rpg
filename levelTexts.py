@@ -1,4 +1,4 @@
-def start_location(gold, items):
+def start_location(player):
     return f'Вы очнулись на поляне в лесу...\n' \
            f'Голова трещит а тело ломит\n' \
            f'Повернув голову, вы видите что рядом с вами лежит мешок..\n' \

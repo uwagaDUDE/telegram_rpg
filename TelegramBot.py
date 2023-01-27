@@ -9,28 +9,35 @@ import levelTexts
 bot = telebot.TeleBot(dotenv_values(".env")["API_KEY"])
 
 startGameButton = "Начать Путешествие"
-checkInventoryButton = "Посмотреть инвентарь"
+checkInventoryButton = "Посмотреть инвентарь" # Для чистоты кода вывести переменные в отдельный файл
 backButton = "Назад"
 prevMessage = None
 prevMarkup = None
 player = None
+
 @bot.message_handler(commands=['start'])  # /start - Главное меню
 def handle_start(message):
-    user = message.from_user
+
+    user = message.from_user #Упрощаем получение пользователя ТГ
+
     global player
     global prevMessage
     global prevMarkup
+
+    #Работа с базой данных
     player = db.getPlayer(user.id)
     if player == None:
         db.createPlayer(user.id,user.username)
         player = db.getPlayer(user.id)
+    
     bot_interface = interface.BotInterface(user, player)
+
+    #Кнопки и сообщение бота
     user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
     user_markup.row(startGameButton, checkInventoryButton)
     user_markup.row('БЛОК3', 'БЛОК4')
-    test=message.text
     prevMarkup = user_markup
-    prevMessage =bot.send_message(user.id, bot_interface.information, reply_markup=user_markup)
+    prevMessage = bot.send_message(user.id, bot_interface.information, reply_markup=user_markup)
 
 
 def bot_init():
@@ -50,13 +57,18 @@ def echo_all(message):
 @bot.message_handler(func=lambda m: True)
 def first_level(message):
     global player
-    user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
-    user_markup.row('Осмотреться', 'Собрать банки', checkInventoryButton)
+    global prevMessage
+
     gold = random.randint(1, 10)
     player["gold"]+gold # Добавляем голду персонажу
-    item = 'А как выбрать рандомный элемент из множества классов?'
-    db.updatePlayer(id, {"location":"forest","items":player["items"]}) # Обновляем перса в дб
-    currentLevel = bot.send_message(message.from_user.id,levelTexts.start_location(gold,item), reply_markup=user_markup)
+    player["items"].append({"testItem":{"cost":0,"description":"тестовая админ шмотка"}})
+    
+    db.updatePlayer(id, {"location":"forest","items":player["items"]})
+
+    user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
+    user_markup.row('Осмотреться', 'Собрать банки', checkInventoryButton)
+    prevMarkup=user_markup # Сделать отдельную функцию или декторатор, которые будут автоматом записывать текст и кнопки
+    prevMessage= bot.send_message(message.from_user.id,levelTexts.start_location(player), reply_markup=user_markup)
 
 
 def player_inventory_check(message):
@@ -66,7 +78,7 @@ def player_inventory_check(message):
     if len(inventory) > 0:
         user_markup.row('Использовать предмет')
         for item in inventory:
-            text += f'\n {item}'
+            text += f'\n {item}' # todo сделать нормальное отображение: НазваниеПредмета: Количество
     else:
         text = 'Инвентарь пуст'
     user_markup.row(backButton)

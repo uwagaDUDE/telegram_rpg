@@ -24,7 +24,7 @@ def createPlayer(id,userName):
         'location':[]
     })
 
-def updatePlayerInventory(id,items):
+def updatePlayerInventory(id,items): # пока не используется, и возможно не планируется
     return mongo.player.update_one({"id":str(id)}, {"push":{"items": items}},upsert= True)
 def updatePlayer(id,updateObject):
     return mongo.players.update_one({"id":str(id)},{"$set":updateObject},upsert=True)
