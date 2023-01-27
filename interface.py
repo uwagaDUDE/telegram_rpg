@@ -1,5 +1,5 @@
 import npc
-
+import telebot
 class StartGame:
 
     def start_game(self,
@@ -13,7 +13,7 @@ class StartGame:
         return name
 class Bot:
 
-    def bot(self):
+    def bot(self, bot):
         user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
         user_markup.row('Начать путешестиве', 'Посмотреть инвентарь')
         user_markup.row('Об игре', 'БЛОК4')
