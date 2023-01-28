@@ -27,7 +27,7 @@ def handle_start(message):
     #Работа с базой данных
     player = db.get_player(user.id)
     if player == None:
-        db.create_new_player(user.id, user.username)
+        db.create_new_player(user.id, user.username or user.first_name)
         player = db.get_player(user.id)
 
 
