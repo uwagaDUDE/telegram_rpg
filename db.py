@@ -24,6 +24,9 @@ def create_new_player(id, userName):
         'location':[]
     })
 
+def pusher(collection,item):
+    mongo[collection].insert_one(item)
+
 def update_player_inventory(id, items): # пока не используется, и возможно не планируется
     return mongo.player.update_one({"id":str(id)}, {"push":{"items": items}},upsert= True)
 def update_player_data(id, updateObject):
