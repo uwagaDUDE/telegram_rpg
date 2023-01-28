@@ -96,11 +96,11 @@ class BotPlayerInfo:
 class Buttons:
 
     def go_forward(self):
-        return "Пойти прямо"
+        return "\U00002B06"
     def go_left(self):
-        return "Пойти налево"
+        return "\U00002B05"
     def go_right(self):
-        return "Пойти направо"
+        return "\U000027A1"
     def empty_backpack(self):
         return "Inventory is empty"
 
@@ -108,7 +108,7 @@ class Buttons:
         return "Начать путешествие \U0001F9ED"
 
     def check_inventory(self):
-        return "\U0001F392 Инвентарь \U0001F392"
+        return "\U0001F392"
 
     def back(self):
         return "Назад \U0001F519"
@@ -122,23 +122,23 @@ class Buttons:
     def empty(self):
         return "КНОПКА"
 
-    def player_information(self):
+    def player_information(self): #Ваш персонаж О_О
         return "\U0001F93AВаш персонаж\U0001F93A"
 
-    def player_name(self, user):
+    def player_name(self, user): #Ник
         return f'Имя: {user.first_name}'
 
-    def player_level(self, player):
+    def player_level(self, player): #Уровень
         return f'\U0001F2B0 Уровень: {player["level"]}'
 
-    def player_health(self, player):
-        return f'\U0001F276 Здоровье: {player["hp"]}'
+    def player_health(self, player): #ХП
+        return f'\U0001FA78\n{player["hp"]}'
 
-    def player_mana(self, player):
-        return f'\U0001F4A7 Мана: {player["mana"]} \U0001F4A7'
+    def player_mana(self, player): #Мана
+        return f'\U0001F4A7\n{player["mana"]}'
 
-    def player_stats(self, player):
-        return f'Характеристики'
+    def player_stats(self, player): #Характеристики
+        return f'\U00002139'
 
-    def fast_trevel(self):
-        return "\U0001F9EDБыстрое перемещение\U0001F9ED"
+    def fast_trevel(self): #Быстрое перемещение
+        return "\U0001F9ED"

@@ -36,11 +36,16 @@ def handle_start(message):
     user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
     #user_markup.row(button.start_game(), button.check_inventory())
     user_markup.row(button.player_information())
-    user_markup.row(button.player_name(user), button.player_level(player),
-                    button.player_health(player), button.player_mana(player))
-    user_markup.row(button.go_left(), button.go_forward(), button.go_right())
+
+    user_markup.row(button.player_name(user),button.player_health(player),
+                    button.player_mana(player))
+
+    user_markup.row(button.go_left(), button.go_forward(),
+                    button.go_right())
+
     user_markup.row(button.check_inventory(), button.fast_trevel(),
                     button.player_stats(player))
+
     prevMarkup = user_markup
     prevMessage = bot.send_message(user.id, player_information.information, reply_markup=user_markup)
 
