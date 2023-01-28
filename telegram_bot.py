@@ -35,7 +35,10 @@ def handle_start(message):
     #Кнопки и сообщение бота
     user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
     user_markup.row(button.start_game(), button.check_inventory())
-    user_markup.row('БЛОК3', 'БЛОК4')
+    user_markup.row(button.empty(), button.empty(), button.empty(), button.empty())
+    user_markup.row(button.player_information())
+    user_markup.row(button.player_name(user), button.player_level(player), button.player_health(player))
+    user_markup.row(button.empty(), button.empty(), button.empty(), button.empty())
     prevMarkup = user_markup
     prevMessage = bot.send_message(user.id, player_information.information, reply_markup=user_markup)
 
@@ -66,7 +69,7 @@ def first_level(message):
     db.update_player_data(id, {"location": "forest", "items":player["items"], 'gold':player['gold']})
 
     user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
-    user_markup.row('Осмотреться', 'Собрать банки', button.check_inventory())
+    user_markup.row(button.look_around(), button.check_inventory())
     prevMarkup=user_markup # Сделать отдельную функцию или декторатор, которые будут автоматом записывать текст и кнопки
     prevMessage= bot.send_message(message.from_user.id,
                                   levelTexts.start_location(player),
@@ -78,7 +81,7 @@ def player_inventory_check(message):
     text = ''
     user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
     if len(inventory) > 0:
-        user_markup.row('Использовать предмет')
+        user_markup.row(button.use_item())
         for item in inventory:
             text += f'\n {item}' # todo сделать нормальное отображение: НазваниеПредмета: Количество
     else:

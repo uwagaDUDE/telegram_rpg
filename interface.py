@@ -86,9 +86,11 @@ class Event:
 class BotPlayerInfo:
     def __init__(self, user, player):
          self.information = f'\nВаш персонаж:\n' \
-                            f'Имя:{user.first_name}\n'\
-                            f'Уровень: { player["level"] }\n'\
-                            f'Предметов в инвентаре: {len(player["items"])}'
+                            f'\U0001F93A Имя: {user.first_name}\n'\
+                            f'\U0001F2B0 Уровень: {player["level"]}\n' \
+                            f'\U0001F276 Здоровье: {player["hp"]}\n' \
+                            f'\U0001F4A7 Мана: {player["mana"]}\n'\
+                            f'\U0001F392 Предметов в инвентаре: {len(player["items"])}'
 
     #Need translate, bcz net russkogo)
 class Buttons:
@@ -97,10 +99,31 @@ class Buttons:
         return "Inventory is empty"
 
     def start_game(self):
-        return "Начать Путешествие"
+        return "Начать путешествие \U0001F9ED"
 
     def check_inventory(self):
-        return "Посмотреть инвентарь"
+        return "Посмотреть инвентарь \U0001F392"
 
     def back(self):
-        return "Назад"
+        return "Назад \U0001F519"
+
+    def look_around(self):
+        return "Осмотреться \U0001F441"
+
+    def use_item(self):
+        return "Использовать предмет"
+
+    def empty(self):
+        return "КНОПКА"
+
+    def player_information(self):
+        return "Ваш персонаж"
+
+    def player_name(self, user):
+        return f'\U0001F93A Имя: {user.first_name}'
+
+    def player_level(self, player):
+        return f'\U0001F2B0 Уровень: {player["level"]}'
+
+    def player_health(self, player):
+        return f'\U0001F276 Здоровье: {player["hp"]}'
