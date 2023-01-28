@@ -5,8 +5,7 @@ items = \
     'iron_sword':0
     }
 player = {
-    'items':'',
-    'test':''
+    'items':''
 }
 item_movement = []
 second_item_movement = []
@@ -79,7 +78,17 @@ class Pizdos:
             self.add_item_in_inventory()
             self.second_add_item_in_inventory()
             print(self.back_to_dict())
+        elif self.put_in_inv() == "2":
+            self.remove_item()
+
+    def remove_item(self):
+        global player
+        player['items'].pop('Test')
+
 #ВЫВОДИМ
 test = Pizdos()
-test.print_dict()
+stop = False
+while stop == False:
+    test.print_dict()
+    print(player)
 
