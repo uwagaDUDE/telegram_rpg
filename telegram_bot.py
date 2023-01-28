@@ -34,11 +34,13 @@ def handle_start(message):
     player_information = interface.BotPlayerInfo(user, player)
     #Кнопки и сообщение бота
     user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
-    user_markup.row(button.start_game(), button.check_inventory())
-    user_markup.row(button.empty(), button.empty(), button.empty(), button.empty())
+    #user_markup.row(button.start_game(), button.check_inventory())
     user_markup.row(button.player_information())
-    user_markup.row(button.player_name(user), button.player_level(player), button.player_health(player))
-    user_markup.row(button.empty(), button.empty(), button.empty(), button.empty())
+    user_markup.row(button.player_name(user), button.player_level(player),
+                    button.player_health(player), button.player_mana(player))
+    user_markup.row(button.go_left(), button.go_forward(), button.go_right())
+    user_markup.row(button.check_inventory(), button.fast_trevel(),
+                    button.player_stats(player))
     prevMarkup = user_markup
     prevMessage = bot.send_message(user.id, player_information.information, reply_markup=user_markup)
 

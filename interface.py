@@ -56,13 +56,13 @@ class Fight:
 class Move:
 
     def forward(self):
-        return print(f'Вы решаете пойти прямо...\n')
+        return f'Вы решаете пойти прямо...\n'
 
     def left_move(self):
-        return print(f'Вы решаете пойти налево...\n')
+        return f'Вы решаете пойти налево...\n'
 
     def right_move(self):
-        return print(f'Вы решаете пойти направо...\n')
+        return f'Вы решаете пойти направо...\n'
 
 class Event:
 
@@ -95,6 +95,12 @@ class BotPlayerInfo:
     #Need translate, bcz net russkogo)
 class Buttons:
 
+    def go_forward(self):
+        return "Пойти прямо"
+    def go_left(self):
+        return "Пойти налево"
+    def go_right(self):
+        return "Пойти направо"
     def empty_backpack(self):
         return "Inventory is empty"
 
@@ -102,7 +108,7 @@ class Buttons:
         return "Начать путешествие \U0001F9ED"
 
     def check_inventory(self):
-        return "Посмотреть инвентарь \U0001F392"
+        return "\U0001F392 Инвентарь \U0001F392"
 
     def back(self):
         return "Назад \U0001F519"
@@ -117,13 +123,22 @@ class Buttons:
         return "КНОПКА"
 
     def player_information(self):
-        return "Ваш персонаж"
+        return "\U0001F93AВаш персонаж\U0001F93A"
 
     def player_name(self, user):
-        return f'\U0001F93A Имя: {user.first_name}'
+        return f'Имя: {user.first_name}'
 
     def player_level(self, player):
         return f'\U0001F2B0 Уровень: {player["level"]}'
 
     def player_health(self, player):
         return f'\U0001F276 Здоровье: {player["hp"]}'
+
+    def player_mana(self, player):
+        return f'\U0001F4A7 Мана: {player["mana"]} \U0001F4A7'
+
+    def player_stats(self, player):
+        return f'Характеристики'
+
+    def fast_trevel(self):
+        return "\U0001F9EDБыстрое перемещение\U0001F9ED"

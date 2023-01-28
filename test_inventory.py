@@ -5,7 +5,7 @@ items = \
     'iron_sword':0
     }
 player = {
-    'items':''
+    'items':0
 }
 item_movement = []
 second_item_movement = []
@@ -88,7 +88,8 @@ class Pizdos:
 #ВЫВОДИМ
 test = Pizdos()
 stop = False
+player_items = player['items']
 while stop == False:
     test.print_dict()
-    print(player)
+    print(player_items['Test'])
 
