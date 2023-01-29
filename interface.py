@@ -11,7 +11,18 @@ class StartGame:
               f'Но как же вас зовут?')
         name = input('Введите свое имя: ')
         return name
+class Bot:
 
+    def bot(self):
+        user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
+        user_markup.row('Начать путешестиве', 'Посмотреть инвентарь')
+        user_markup.row('Об игре', 'БЛОК4')
+        bot.send_message(
+            user.id, f'Добро пожаловать {user.first_name} \n'
+                     f'Ваш персонаж: \n   '
+                     f'Уровень: {player["level"]}   '
+                     f'\n Предметов в инвентаре: {len(player["items"])}',
+            reply_markup=user_markup)
 class Interface:
 
     def what_to_do(self):
@@ -45,13 +56,13 @@ class Fight:
 class Move:
 
     def forward(self):
-        return print(f'Вы решаете пойти прямо...\n')
+        return f'Вы решаете пойти прямо...\n'
 
     def left_move(self):
-        return print(f'Вы решаете пойти налево...\n')
+        return f'Вы решаете пойти налево...\n'
 
     def right_move(self):
-        return print(f'Вы решаете пойти направо...\n')
+        return f'Вы решаете пойти направо...\n'
 
 class Event:
 
@@ -72,3 +83,62 @@ class Event:
     def nothink_event(self):
         return print(f'Vi prodoljaete idti...')
 
+class BotPlayerInfo:
+    def __init__(self, user, player):
+         self.information = f'\nВаш персонаж:\n' \
+                            f'\U0001F93A Имя: {user.first_name}\n'\
+                            f'\U0001F2B0 Уровень: {player["level"]}\n' \
+                            f'\U0001F276 Здоровье: {player["hp"]}\n' \
+                            f'\U0001F4A7 Мана: {player["mana"]}\n'\
+                            f'\U0001F392 Предметов в инвентаре: {len(player["items"])}'
+
+    #Need translate, bcz net russkogo)
+class Buttons:
+
+    def go_forward(self):
+        return "\U00002B06"
+    def go_left(self):
+        return "\U00002B05"
+    def go_right(self):
+        return "\U000027A1"
+    def empty_backpack(self):
+        return "Inventory is empty"
+
+    def start_game(self):
+        return "Начать путешествие \U0001F9ED"
+
+    def check_inventory(self):
+        return "\U0001F392"
+
+    def back(self):
+        return "Назад \U0001F519"
+
+    def look_around(self):
+        return "Осмотреться \U0001F441"
+
+    def use_item(self):
+        return "Использовать предмет"
+
+    def empty(self):
+        return "КНОПКА"
+
+    def player_information(self): #Ваш персонаж О_О
+        return "\U0001F93AВаш персонаж\U0001F93A"
+
+    def player_name(self, user): #Ник
+        return f'Имя: {user.first_name}'
+
+    def player_level(self, player): #Уровень
+        return f'\U0001F2B0 Уровень: {player["level"]}'
+
+    def player_health(self, player): #ХП
+        return f'\U0001FA78\n{player["hp"]}'
+
+    def player_mana(self, player): #Мана
+        return f'\U0001F4A7\n{player["mana"]}'
+
+    def player_stats(self, player): #Характеристики
+        return f'\U00002139'
+
+    def fast_trevel(self): #Быстрое перемещение
+        return "\U0001F9ED"
