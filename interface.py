@@ -67,21 +67,21 @@ class Move:
 class Event:
 
     def wallet_with_gold(self, random_gold=0):
-        return print(f'\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n'
-                     f'Вы нашли мешочек с золотом, в нем было {random_gold} монет\n'
-                     f'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n')
+        return f'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n'\
+               f'Вы нашли мешочек с золотом, в нем было {random_gold} монет\n'\
+               f'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n'
 
     def player_see_enemy(self, monster_name):
-        return print(f'Вы замечаете {monster_name} вдалеке, что вы решаете сделать? \n'
-                     f'1. Атаковать\n'
-                     f'2. Пройти мимо\n')
+        return f'Вы замечаете {monster_name} вдалеке, что вы решаете сделать? \n'\
+               f'1. Атаковать\n'\
+               f'2. Пройти мимо\n'
 
-    def player_attacked_by_enemy(self, monster_name):
-        return print(f'На вас напал {monster_name}!'
-                     f'\nЗащищайтесь!\n')
+    def player_attacked_by_enemy(self):
+        return f'На вас напал !'\
+               f'\nЗащищайтесь!\n'
 
     def nothink_event(self):
-        return print(f'Vi prodoljaete idti...')
+        return f'Ничего интересного'
 
 class BotPlayerInfo:
     def __init__(self, user, player):

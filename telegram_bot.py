@@ -1,11 +1,13 @@
 import interface
+import scripts
 import telebot
 import os
 from dotenv import dotenv_values
 import db
 import random
 import levelTexts
-
+move = interface.Move()
+events = scripts.Event()
 bot = telebot.TeleBot(dotenv_values(".env")["API_KEY"])
 button = interface.Buttons()
 # startGameButton = "Начать Путешествие" UJE NE NUJO, ONI V interface
@@ -14,7 +16,7 @@ button = interface.Buttons()
 prevMessage = None
 prevMarkup = None
 player = None
-
+event = events.player_event_while_move()
 @bot.message_handler(commands=['start'])  # /start - Главное меню
 def handle_start(message):
 
@@ -29,7 +31,6 @@ def handle_start(message):
     if player == None:
         db.create_new_player(user.id, user.username or user.first_name)
         player = db.get_player(user.id)
-
 
     player_information = interface.BotPlayerInfo(user, player)
     #Кнопки и сообщение бота
@@ -47,7 +48,7 @@ def handle_start(message):
                     button.player_stats(player))
 
     prevMarkup = user_markup
-    prevMessage = bot.send_message(user.id, player_information.information, reply_markup=user_markup)
+    prevMessage = bot.send_message(user.id, levelTexts.start_location(player), reply_markup=user_markup)
 
 
 def bot_init():
@@ -63,6 +64,10 @@ def echo_all(message):
         player_inventory_check(message)
     elif text == button.back():
         back_button(message)
+    elif text == button.go_forward():
+        forward_button(message)
+        event.player_event_while_move()
+
 
 @bot.message_handler(func=lambda m: True)
 def first_level(message):
@@ -98,3 +103,12 @@ def player_inventory_check(message):
 
 def back_button(message):
     bot.send_message(message.from_user.id,prevMessage.text, reply_markup=prevMarkup)
+
+@bot.message_handler(commands=['forward'])
+def forward_button(message):
+    bot.send_message(message.from_user.id, move.forward())
+
+@bot.message_handler(commands=['forward'])
+def forward_button(message):
+    bot.send_message(message.from_user.id, move.forward())
+    bot.send_message(message.from_user.id, event)

@@ -1,3 +1,4 @@
+import db
 import interface
 import items
 import scripts
@@ -10,7 +11,7 @@ move = scripts.Movement()
 interface = interface.Interface()
 
 event = scripts.Event()
-
+#db.pusher()
 telegram_bot.bot_init()
 
 

@@ -30,34 +30,34 @@ class Event:
     def random_event(self):
         return random.randint(1,100)
 
-    def player_event_while_move(self, monster_name):
+    def player_event_while_move(self):
         #Napadeniye igroka na monstra
-        if self.random_event() >= 1 and self.random_event() < 10:
-            event.player_see_enemy(monster_name)
-            is_player_attack = input(f'1. Attack\n'
-                                     f'2. Go away')
-            if is_player_attack == "1":
-                fight = True
-                enemy_health = Fight().enemy_hp
-                while fight == True:
-                    Fight().start_fight()
-                    interface.Fight().player_turn()
-                    player_attack = input('What to do: ')
-                    if player_attack == "1":
-                        damage = player.Player().damage+items.Items().Weapons().WoodenSword().damage
-                        interface.Fight().player_attack_turn(damage, Fight().enemy_name)
-                        enemy_health = enemy_health-damage
-                        print(enemy_health)
-                        if enemy_health <= 0:
-                            fight = False
-            else:
-                print('You turn around and go away...')
-        elif self.random_event() >= 10 and self.random_event() < 15:
-            event.wallet_with_gold(self.random_gold())
+        # if self.random_event() >= 1 and self.random_event() < 10:
+        #     event.player_see_enemy(monster_name)
+        #     is_player_attack = input(f'1. Attack\n'
+        #                              f'2. Go away')
+        #     if is_player_attack == "1":
+        #         fight = True
+        #         enemy_health = Fight().enemy_hp
+        #         while fight == True:
+        #             Fight().start_fight()
+        #             interface.Fight().player_turn()
+        #             player_attack = input('What to do: ')
+        #             if player_attack == "1":
+        #                 damage = player.Player().damage+items.Items().Weapons().WoodenSword().damage
+        #                 interface.Fight().player_attack_turn(damage, Fight().enemy_name)
+        #                 enemy_health = enemy_health-damage
+        #                 print(enemy_health)
+        #                 if enemy_health <= 0:
+        #                     fight = False
+        #     else:
+        #         print('You turn around and go away...')
+        if self.random_event() >= 10 and self.random_event() < 15:
+            return event.wallet_with_gold(self.random_gold())
         elif self.random_event() >= 15 and self.random_event() < 30:
-            event.player_attacked_by_enemy(monster_name)
+            return event.player_attacked_by_enemy()
         else:
-            event.nothink_event()
+            return event.nothink_event()
 
 
     def random_gold(self):

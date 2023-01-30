@@ -10,50 +10,50 @@ class Enemy:
             def __init__(self):
                 self.name = 'Орк рабочий'
                 self.hp = 100
-                self.damage = random.randint(5,15)
-                self.gold = random.randint(1,2)
+                self.damage = {'min':5, 'max':15}
+                self.gold = {'min':1, 'max':2}
 
         class Warrior:
             def __init__(self):
                 self.name = 'Рубака'
                 self.hp = 110
-                self.damage = random.randint(15,30)
-                self.gold = random.randint(1,15)
+                self.damage = {'min':15, 'max':30}
+                self.gold = {'min':1, 'max':15}
 
         class Shaman:
             def __init__(self):
                 self.name ='Орк шаман'
                 self.hp = 50
-                self.damage = random.randint(60)
-                self.gold = random.randint(1, 20)
+                self.damage = {'min':60, 'max':60}
+                self.gold = {'min':1, 'max':20}
 
         class Hunter:
             def __init__(self):
                 self.name ='Орочий фуражир'
                 self.hp = 200
-                self.damage = random.randint(10, 20)
-                self.gold = random.randint(1,50)
+                self.damage = {'min':10, 'max':20}
+                self.gold = {'min':1, 'max':50}
 
         class Warlord:
             def __init__(self):
                 self.name ='Вождь'
                 self.hp = 500
-                self.damage = random.randint(50,100)
-                self.gold = random.randint(50,200)
+                self.damage = {'min':50, 'max':100}
+                self.gold = {'min':1, 'max':200}
 
         class HighShaman:
             def __init__(self):
                 self.name ='Верховный шаман'
                 self.hp = 250
-                self.damage = random.randint(70, 150)
-                self.gold = random.randint(50, 150)
+                self.damage = {'min':70, 'max':150}
+                self.gold = {'min':1, 'max':150}
 
         class Rider:
             def __init__(self):
                 self.name ='Волчий наездник'
                 self.hp = 150
-                self.damage = random.randint(20,30)
-                self.gold = random.randint(1,37)
+                self.damage = {'min':20, 'max':30}
+                self.gold = {'min':1, 'max':37}
 
     class Animals:
 
@@ -98,8 +98,8 @@ class Enemy:
             def __init__(self):
                 self.name ='Некромант'
                 self.hp = 100
-                self.damage = random.randint(1, 20)
-                self.gold = random.randint(1,20)
+                self.damage = {'min':15, 'max':20}
+                self.gold = {'min':10, 'max':25}
 
     class Undeads:
 
