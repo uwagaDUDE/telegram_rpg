@@ -29,11 +29,10 @@ def handle_start(message):
 
     global prevMessage
     global prevMarkup
-
+    start_item = random.choice(items.ItemLoader().start_items())
     getPlayer(message)
-    print(random.choice(items.ItemLoader().start_items()))
 
-    #player["items"].append(random.choice(started_weapon))
+    player["items"].append(start_item)
     #db.update_player_data(user.id,player)
     player_information = interface.BotPlayerInfo(user, player)
     #Кнопки и сообщение бота
@@ -110,7 +109,7 @@ def player_inventory_check(message):
     if len(inventory) > 0:
         user_markup.row(button.use_item())
         for item in inventory:
-            text += f'\n Название: {item.name} Урон: {item.damage}' # todo сделать нормальное отображение: НазваниеПредмета: Количество
+            text += f'\n Название: {item["item_name"]}' # todo сделать нормальное отображение: НазваниеПредмета: Количество
     else:
         text = button.empty_backpack()
     user_markup.row(button.back())
