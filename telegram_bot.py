@@ -73,8 +73,13 @@ def echo_all(message):
     elif text == 'Ваншотнуть врага: 100 руб':
         bot.send_message(message.from_user.id,'Не вижу деняк на киви, за такое твой аккаунт забанен')
 
+@bot.callback_query_handler(func=lambda call: True)
+def callback_query(message):
+    print(message)
+    text = message.text
+    if text == text.startswith('use_'):
+        equipItem(message)
 
-@bot.message_handler(func=lambda m: True)
 def first_level(message):
     global player
     global prevMessage
@@ -95,26 +100,22 @@ def first_level(message):
 
 
 def player_inventory_check(message):
+    if player == None:
+        return
     inventory = player["items"]
+    types = telebot.types
+    markup = types.InlineKeyboardMarkup()
     text = ''
-    user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
+    user_markup = telebot.types.InlineKeyboardMarkup()
 
-    equipedText='Текущий предмет в руке: '
-    if len(player["equiped_item"]):
-        equipedText+= str(player["equiped_item"])
+    markup.row_width = len(player["items"])
+    if len(player['equiped_item']):
+        text=f'Текущий экипированный предмет: {player["equiped_item"]["item_name"]}'
     else:
-        equipedText+='Нет предмета'
-
-
-    if len(inventory) > 0:
-        user_markup.row(button.use_item())
-        for item in inventory:
-            text += f'\n Название: {item["item_name"]}' # todo сделать нормальное отображение: НазваниеПредмета: Количество
-    else:
-        text = button.empty_backpack()
-    user_markup.row(button.back())
-    bot.send_message(message.from_user.id,text, reply_markup=user_markup)
-    bot.send_message(message.from_user.id,equipedText, reply_markup=user_markup)
+        text = 'Ни одного предмета не экпировано'
+    for item in inventory:
+        markup.add(types.InlineKeyboardButton(f'{item["item_name"]}', callback_data=f'use_{item["item_name"]}'))
+    bot.send_message(message.chat.id, text, reply_markup=markup)
 
 def back_button(message):
     bot.send_message(message.from_user.id,prevMessage.text, reply_markup=prevMarkup)
@@ -174,3 +175,10 @@ def getPlayer(message):
     if player == None:
         db.create_new_player(user.id, user.username or user.first_name)
         player = db.get_player(user.id)
+def equipItem(message):
+    item = message.text.replace('use_','')
+    if len(player['equiped_item']):
+        player['items'].append(item)
+    player['equiped_item']= filter(lambda element: item == element['item_name'], player['items'])
+    player['items'].remove(item)
+    player_inventory_check(message)
