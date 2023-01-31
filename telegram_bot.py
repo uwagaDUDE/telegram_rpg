@@ -6,6 +6,8 @@ from dotenv import dotenv_values
 import db
 import random
 import levelTexts
+from items import Items
+
 move = interface.Move()
 events = scripts.Event()
 bot = telebot.TeleBot(dotenv_values(".env")["API_KEY"])
@@ -17,9 +19,11 @@ prevMessage = None
 prevMarkup = None
 player = None
 event = events.player_event_while_move()
+
+
 @bot.message_handler(commands=['start'])  # /start - Главное меню
 def handle_start(message):
-
+    
     user = message.from_user #Упрощаем получение пользователя ТГ
 
     global player
@@ -32,6 +36,16 @@ def handle_start(message):
         db.create_new_player(user.id, user.username or user.first_name)
         player = db.get_player(user.id)
 
+
+
+
+    started_weapon = [weapons.WoodenStaff(player['stats']['intelegency']),weapons.WoodenSword()] #ХЕЛП つ ◕_◕ ༽つ 
+
+
+
+
+    player["items"].append(random.choice(started_weapon))
+    db.update_player_data(user.id,player)
     player_information = interface.BotPlayerInfo(user, player)
     #Кнопки и сообщение бота
     user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
@@ -72,10 +86,11 @@ def echo_all(message):
 def first_level(message):
     global player
     global prevMessage
+    started_weapon = [weapons.WoodenStaff(player.stats.intelegency,weapons.WoodenSword())]
 
     gold = random.randint(1, 10)
     player['gold'] = player["gold"]+gold # Добавляем голду персонажу # a ono work? i havnt gold anyway
-    player["items"].append({"testItem":{"cost":0,"description":"тестовая админ шмотка"}})
+    player["items"].append(random.choice(started_weapon))
     
     db.update_player_data(id, {"location": "forest", "items":player["items"], 'gold':player['gold']})
 
@@ -94,7 +109,7 @@ def player_inventory_check(message):
     if len(inventory) > 0:
         user_markup.row(button.use_item())
         for item in inventory:
-            text += f'\n {item}' # todo сделать нормальное отображение: НазваниеПредмета: Количество
+            text += f'\n Название: {item.name} Урон: {item.damage}' # todo сделать нормальное отображение: НазваниеПредмета: Количество
     else:
         text = button.empty_backpack()
     user_markup.row(button.back())

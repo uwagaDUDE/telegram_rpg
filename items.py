@@ -5,10 +5,12 @@ import random
 # 300 - Food
 # 500 - Quests items
 # 1000 - Craft items
+
 class Items:
     
     class Weapons:
         
+
         class WoodenSword:
             def __init__(self):
                 self.name = 'Деревянный меч'
@@ -32,6 +34,16 @@ class Items:
                 self.sell_price = 50
                 self.buy_price = 100
                 self.item_id = 102
+
+        class WoodenStaff:
+            def __init__(self,intelegency):
+                self.name = 'Деревянный посох'
+                self.damage = random.randint(3, 6) * intelegency
+                self.sell_price = 5
+                self.buy_price = 10
+                self.item_id = 103
+                
+
                 
     class Armor:
 
