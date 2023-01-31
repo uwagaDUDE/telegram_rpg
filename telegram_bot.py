@@ -66,7 +66,6 @@ def echo_all(message):
         back_button(message)
     elif text == button.go_forward():
         forward_button(message)
-        event.player_event_while_move()
 
 
 @bot.message_handler(func=lambda m: True)
@@ -104,11 +103,9 @@ def player_inventory_check(message):
 def back_button(message):
     bot.send_message(message.from_user.id,prevMessage.text, reply_markup=prevMarkup)
 
-@bot.message_handler(commands=['forward'])
 def forward_button(message):
     bot.send_message(message.from_user.id, move.forward())
 
-@bot.message_handler(commands=['forward'])
 def forward_button(message):
     bot.send_message(message.from_user.id, move.forward())
     bot.send_message(message.from_user.id, event)

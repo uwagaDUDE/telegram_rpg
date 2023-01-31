@@ -52,12 +52,8 @@ class Event:
         #                     fight = False
         #     else:
         #         print('You turn around and go away...')
-        if self.random_event() >= 10 and self.random_event() < 15:
-            return event.wallet_with_gold(self.random_gold())
-        elif self.random_event() >= 15 and self.random_event() < 30:
-            return event.player_attacked_by_enemy()
-        else:
-            return event.nothink_event()
+        return event.nothink_event()
+
 
 
     def random_gold(self):
