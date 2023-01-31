@@ -1,5 +1,5 @@
 import json
-
+import random
 
 class ItemLoader:
     def start_items(self):
@@ -9,16 +9,12 @@ class ItemLoader:
         return items['start_items']
 
     def start_items_massive(self):
-        id_list = ["0", "1"]
-        massive_with_code_name = []
-        massive_with_id = []
+        items = []
+        # massive_with_id = []
         # x = dict(zip(e2f.values(), e2f.keys()))
         for i in self.start_items():
-            massive_with_code_name.append(i)
-            for b in self.start_items()[i]:
-                if self.start_items()[i][b] in id_list:
-                    massive_with_id.append(self.start_items()[i][b])
-        return f'Массив с названиями обьектов: {massive_with_code_name},\n' \
-               f'массив с ID предметов {massive_with_id}'
+            items.append(i)
+            x = random.choice(items)
+        return x
 
-print(ItemLoader().start_items_massive())
+print(ItemLoader().start_items()[ItemLoader().start_items_massive()])

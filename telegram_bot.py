@@ -36,8 +36,6 @@ def handle_start(message):
     started_weapon = [weapons.WoodenStaff(),weapons.WoodenSword()] #ХЕЛП つ ◕_◕ ༽つ 
 
 
-
-
     player["items"].append(random.choice(started_weapon))
     db.update_player_data(user.id,player)
     player_information = interface.BotPlayerInfo(user, player)
@@ -76,7 +74,7 @@ def echo_all(message):
         forward_button(message)
     elif text == 'fight':
         fight(message)
-    elif text == 'Ваншотнуть врага: 100 руб':
+    elif text == 'cheat.admin_001':
         bot.send_message(message.from_user.id,'Не вижу деняк на киви, за такое твой аккаунт забанен')
 
 
@@ -136,12 +134,14 @@ def fight(message):
         if enemy == None:
             enemys= list(db.getCollection('enemy'))
             enemy = random.choice(enemys)
-            text=f'Ваш враг {enemy["name"]} \n HP {enemy["hp"]}'
+            text=f'Ваш враг {enemy["name"]}\n' \
+                 f'HP {enemy["hp"]}'
         else:
             enemy['hp'] -=10
             text= ''
             text+=f'Вы наносите 10урона'
-            text+=f'Ваш враг {enemy["name"]} \n HP {enemy["hp"]}'
+            text+=f'Ваш враг {enemy["name"]}\n' \
+                  f'HP {enemy["hp"]}'
         user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
         user_markup.row('fight')
         bot.send_message(message.from_user.id,text,reply_markup=user_markup)

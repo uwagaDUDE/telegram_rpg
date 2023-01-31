@@ -16,6 +16,22 @@
     "sell_cost": "10",
     "buy_cost": "15",
     "item_id": "1"
+    },
+    "wooden_bow":
+    {
+    "item_name": "Деревянный лук",
+    "damage": "5",
+    "sell_cost": "10",
+    "buy_cost": "15",
+    "item_id": "1"
+    },
+    "wooden_glock":
+    {
+    "item_name": "Деревянный глок? О_о",
+    "damage": "5",
+    "sell_cost": "10",
+    "buy_cost": "15",
+    "item_id": "1"
     }
   }
 }
