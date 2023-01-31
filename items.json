@@ -4,18 +4,18 @@
     "wooden_sword":
     {
     "item_name": "Деревянный меч",
-    "damage": 5,
-    "sell_cost": 10,
-    "buy_cost": 15,
-    "item_id": 0
+    "damage": "5",
+    "sell_cost": "10",
+    "buy_cost": "15",
+    "item_id": "0"
     },
     "wooden_staff":
     {
     "item_name": "Деревянный посох",
-    "damage": 5,
-    "sell_cost": 10,
-    "buy_cost": 15,
-    "item_id": 1
+    "damage": "5",
+    "sell_cost": "10",
+    "buy_cost": "15",
+    "item_id": "1"
     }
   }
 }
