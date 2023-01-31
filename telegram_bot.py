@@ -6,7 +6,7 @@ from dotenv import dotenv_values
 import db
 import random
 import levelTexts
-from items import Items
+import items
 
 move = interface.Move()
 events = scripts.Event()
@@ -21,7 +21,6 @@ player = None
 enemy = None
 isPlayerMove = True
 event = events.player_event_while_move()
-weapons = Items().Weapons()
 
 @bot.message_handler(commands=['start'])  # /start - Главное меню
 def handle_start(message):
@@ -32,14 +31,10 @@ def handle_start(message):
     global prevMarkup
 
     getPlayer(message)
+    print(random.choice(items.ItemLoader().start_items()))
 
-    started_weapon = [weapons.WoodenStaff(),weapons.WoodenSword()] #ХЕЛП つ ◕_◕ ༽つ 
-
-
-
-
-    player["items"].append(random.choice(started_weapon))
-    db.update_player_data(user.id,player)
+    #player["items"].append(random.choice(started_weapon))
+    #db.update_player_data(user.id,player)
     player_information = interface.BotPlayerInfo(user, player)
     #Кнопки и сообщение бота
     user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
@@ -104,6 +99,14 @@ def player_inventory_check(message):
     inventory = player["items"]
     text = ''
     user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
+
+    equipedText='Текущий предмет в руке: '
+    if len(player["equiped_item"]):
+        equipedText+= str(player["equiped_item"])
+    else:
+        equipedText+='Нет предмета'
+
+
     if len(inventory) > 0:
         user_markup.row(button.use_item())
         for item in inventory:
@@ -112,6 +115,7 @@ def player_inventory_check(message):
         text = button.empty_backpack()
     user_markup.row(button.back())
     bot.send_message(message.from_user.id,text, reply_markup=user_markup)
+    bot.send_message(message.from_user.id,equipedText, reply_markup=user_markup)
 
 def back_button(message):
     bot.send_message(message.from_user.id,prevMessage.text, reply_markup=prevMarkup)

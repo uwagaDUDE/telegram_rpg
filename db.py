@@ -18,6 +18,7 @@ def create_new_player(id, userName):
         'userName': userName,
         'level': 1,
         'hp': 100,
+        'equiped_item':{},
         'mana': 100,
         'gold': 0,
         'stats': {
