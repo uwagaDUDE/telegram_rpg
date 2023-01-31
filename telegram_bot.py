@@ -74,11 +74,11 @@ def echo_all(message):
         bot.send_message(message.from_user.id,'Не вижу деняк на киви, за такое твой аккаунт забанен')
 
 @bot.callback_query_handler(func=lambda call: True)
-def callback_query(message):
-    print(message)
-    text = message.text
-    if text == text.startswith('use_'):
-        equipItem(message)
+def callback_query(callback):
+    text = callback.data
+    if 'use_' in text:
+        equipItem(text)
+        
 
 def first_level(message):
     global player
@@ -107,7 +107,6 @@ def player_inventory_check(message):
     markup = types.InlineKeyboardMarkup()
     text = ''
     user_markup = telebot.types.InlineKeyboardMarkup()
-
     markup.row_width = len(player["items"])
     if len(player['equiped_item']):
         text=f'Текущий экипированный предмет: {player["equiped_item"]["item_name"]}'
@@ -175,10 +174,13 @@ def getPlayer(message):
     if player == None:
         db.create_new_player(user.id, user.username or user.first_name)
         player = db.get_player(user.id)
-def equipItem(message):
-    item = message.text.replace('use_','')
+def equipItem(text):
+    global prevMessage
+    print(text)
+    item = text.replace('use_','')
     if len(player['equiped_item']):
         player['items'].append(item)
-    player['equiped_item']= filter(lambda element: item == element['item_name'], player['items'])
-    player['items'].remove(item)
-    player_inventory_check(message)
+    player['equiped_item']= list(filter(lambda element: item == element['item_name'], player['items']))[0]
+    item_to_remove= list(filter(lambda inventoryItem: inventoryItem['item_name'] == items, player['items']))
+    if len(item_to_remove):
+        player['items'].remove(item_to_remove[0])
