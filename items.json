@@ -9,5 +9,13 @@
     "buy_cost": 15,
     "item_id": 0
     },
+    "wooden_staff":
+    {
+    "item_name": "Деревянный посох",
+    "damage": 5,
+    "sell_cost": 10,
+    "buy_cost": 15,
+    "item_id": 1
+    }
   }
 }
