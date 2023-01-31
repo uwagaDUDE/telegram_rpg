@@ -29,6 +29,8 @@ def create_new_player(id, userName):
         'location': Location.Lobby.value
     })
 
+def getCollection(collection):
+    return mongo[collection].find({})
 
 def pusher():
     mongo.enemy.insert_one(

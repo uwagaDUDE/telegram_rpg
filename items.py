@@ -36,9 +36,9 @@ class Items:
                 self.item_id = 102
 
         class WoodenStaff:
-            def __init__(self,intelegency):
+            def __init__(self):
                 self.name = 'Деревянный посох'
-                self.damage = random.randint(3, 6) * intelegency
+                self.damage = random.randint(3, 6)
                 self.sell_price = 5
                 self.buy_price = 10
                 self.item_id = 103

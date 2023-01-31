@@ -18,28 +18,22 @@ button = interface.Buttons()
 prevMessage = None
 prevMarkup = None
 player = None
+enemy = None
+isPlayerMove = True
 event = events.player_event_while_move()
-
+weapons = Items().Weapons()
 
 @bot.message_handler(commands=['start'])  # /start - Главное меню
 def handle_start(message):
     
     user = message.from_user #Упрощаем получение пользователя ТГ
 
-    global player
     global prevMessage
     global prevMarkup
 
-    #Работа с базой данных
-    player = db.get_player(user.id)
-    if player == None:
-        db.create_new_player(user.id, user.username or user.first_name)
-        player = db.get_player(user.id)
+    getPlayer(message)
 
-
-
-
-    started_weapon = [weapons.WoodenStaff(player['stats']['intelegency']),weapons.WoodenSword()] #ХЕЛП つ ◕_◕ ༽つ 
+    started_weapon = [weapons.WoodenStaff(),weapons.WoodenSword()] #ХЕЛП つ ◕_◕ ༽つ 
 
 
 
@@ -80,6 +74,10 @@ def echo_all(message):
         back_button(message)
     elif text == button.go_forward():
         forward_button(message)
+    elif text == 'fight':
+        fight(message)
+    elif text == 'Ваншотнуть врага: 100 руб':
+        bot.send_message(message.from_user.id,'Не вижу деняк на киви, за такое твой аккаунт забанен')
 
 
 @bot.message_handler(func=lambda m: True)
@@ -124,3 +122,52 @@ def forward_button(message):
 def forward_button(message):
     bot.send_message(message.from_user.id, move.forward())
     bot.send_message(message.from_user.id, event)
+
+
+def fight(message):
+    global enemy
+    global player
+    if player==None:
+        getPlayer(message)
+    if(player and player["hp"] <=0):
+        return bot.send_message(message.from_user.id,'Ты умер, угомонись')
+
+    if isPlayerMove:
+        if enemy == None:
+            enemys= list(db.getCollection('enemy'))
+            enemy = random.choice(enemys)
+            text=f'Ваш враг {enemy["name"]} \n HP {enemy["hp"]}'
+        else:
+            enemy['hp'] -=10
+            text= ''
+            text+=f'Вы наносите 10урона'
+            text+=f'Ваш враг {enemy["name"]} \n HP {enemy["hp"]}'
+        user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
+        user_markup.row('fight')
+        bot.send_message(message.from_user.id,text,reply_markup=user_markup)
+    else:
+        enemyAttack(message)
+    togglePlayerMove()
+
+
+def enemyAttack(message):
+    enemyDamage = random.randint(enemy['damage']['min'], enemy['damage']['max'])
+    player['hp']-=enemyDamage
+    text=f'{enemy["name"]} наносит вам {enemyDamage} урона'
+    text+=f'Ваше здоровье: {player["hp"]}'
+    user_markup = telebot.types.ReplyKeyboardMarkup(True, True)
+    user_markup.row('fight')
+    user_markup.row('Ваншотнуть врага: 100 руб')
+    bot.send_message(message.from_user.id,text,reply_markup=user_markup)
+
+def togglePlayerMove():
+    global isPlayerMove
+    isPlayerMove=not isPlayerMove
+
+def getPlayer(message):
+    user = message.from_user
+    global player
+    player = db.get_player(user.id)
+    if player == None:
+        db.create_new_player(user.id, user.username or user.first_name)
+        player = db.get_player(user.id)
